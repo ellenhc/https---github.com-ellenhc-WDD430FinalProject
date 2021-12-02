@@ -9,6 +9,11 @@ import { GiftsComponent } from './gifts/gifts.component';
 import { RecipientListComponent } from './recipients/recipient-list/recipient-list.component';
 import { RecipientDetailComponent } from './recipients/recipient-detail/recipient-detail.component';
 import { RecipientItemComponent } from './recipients/recipient-list/recipient-item/recipient-item.component';
+import { RecipientEditComponent } from './recipients/recipient-edit/recipient-edit.component';
+import { GiftListComponent } from './gifts/gift-list/gift-list.component';
+import { GiftEditComponent } from './gifts/gift-edit/gift-edit.component';
+import { GiftDetailComponent } from './gifts/gift-detail/gift-detail.component';
+import { GiftItemComponent } from './gifts/gift-list/gift-item/gift-item.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,12 @@ import { RecipientItemComponent } from './recipients/recipient-list/recipient-it
     GiftsComponent,
     RecipientListComponent,
     RecipientDetailComponent,
-    RecipientItemComponent
+    RecipientItemComponent,
+    RecipientEditComponent,
+    GiftListComponent,
+    GiftEditComponent,
+    GiftDetailComponent,
+    GiftItemComponent
   ],
   imports: [
     BrowserModule,
