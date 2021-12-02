@@ -8,6 +8,7 @@ import { RecipientsComponent } from './recipients/recipients.component';
 import { GiftsComponent } from './gifts/gifts.component';
 import { RecipientListComponent } from './recipients/recipient-list/recipient-list.component';
 import { RecipientDetailComponent } from './recipients/recipient-detail/recipient-detail.component';
+import { RecipientItemComponent } from './recipients/recipient-list/recipient-item/recipient-item.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RecipientDetailComponent } from './recipients/recipient-detail/recipien
     RecipientsComponent,
     GiftsComponent,
     RecipientListComponent,
-    RecipientDetailComponent
+    RecipientDetailComponent,
+    RecipientItemComponent
   ],
   imports: [
     BrowserModule,
