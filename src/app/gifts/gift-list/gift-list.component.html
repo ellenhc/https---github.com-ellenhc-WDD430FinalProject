@@ -1,13 +1,16 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row pad-left-right">
-            <span class="pull-left title">Add Gifts</span>
+            <span class="pull-left title">Gifts</span>
             <a class="btn btn-success pull-right">Add Gift</a>
         </div>
     </div>
     <div class="panel-body">
         <div class="center-panel">
-            <app-gift-item></app-gift-item>
+            <app-gift-item
+            *ngFor="let giftElement of gifts"
+            [gift]="giftElement"
+            (click)="onSelectedGift(giftElement)"></app-gift-item>
         </div>
     </div>
 

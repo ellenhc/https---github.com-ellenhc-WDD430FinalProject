@@ -1,1 +1,35 @@
-<p>gift-detail works!</p>
+<div class="panel panel-default" xmlns="http://www.w3.org/1999/html">
+    <div class="panel-heading">
+      <div class="row pad-all">
+        <h4 class="title margin-left-right">{{gift?.name}}</h4>
+        <div class="row pull-right margin-left-right">
+          <a class="btn btn-primary">View</a>
+          <a class="btn btn-info" >Edit</a>
+          <a class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="pad-left-right">
+        <img [src]="gift.imageUrl" alt="{{gift.name}}">
+        <div>
+          <div class="row">
+            <label>Recipient:</label>
+            <span class="label-value"> {{gift.recipient}}</span>
+          </div>
+          <div class="row">
+            <label>Price:</label>
+            <span class="label-value"> {{gift.price}}</span>
+          </div>
+          <div class="row">
+            <label>Retailer:</label>
+            <span class="label-value"> {{gift.retailer}}</span>
+          </div>
+          <div class="row">
+            <label>URL:</label>
+            <span class="label-value"> {{gift.url}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

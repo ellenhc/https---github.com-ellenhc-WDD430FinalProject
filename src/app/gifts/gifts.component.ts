@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Gift } from './gift.model';
 
 @Component({
   selector: 'app-gifts',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gifts.component.css']
 })
 export class GiftsComponent implements OnInit {
+  selectedGift: Gift;
 
   constructor() { }
 
