@@ -1,4 +1,6 @@
-<app-header></app-header>
+<app-header (selectedFeatureEvent)="switchView($event)"></app-header>
 <div class="container">
-  <router-outlet></router-outlet>
+  <!-- <router-outlet></router-outlet> -->
+  <app-gifts *ngIf="selectedFeature === 'gifts'"></app-gifts>
+  <app-recipients *ngIf="selectedFeature === 'recipients'"></app-recipients>
 </div>

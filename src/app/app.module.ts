@@ -15,7 +15,7 @@ import { GiftEditComponent } from './gifts/gift-edit/gift-edit.component';
 import { GiftDetailComponent } from './gifts/gift-detail/gift-detail.component';
 import { GiftItemComponent } from './gifts/gift-list/gift-item/gift-item.component';
 
-import { AppRoutingModule } from './app-routing.module';
+//import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    //AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
