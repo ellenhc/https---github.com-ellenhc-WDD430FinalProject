@@ -1,5 +1,7 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Recipient } from './recipient.model';
+import { RecipientService } from './recipient.service';
 
 @Component({
   selector: 'app-recipients',
@@ -10,9 +12,13 @@ export class RecipientsComponent implements OnInit {
 
   selectedRecipient: Recipient;
 
-  constructor() { }
+  constructor(private recipientService: RecipientService) { }
 
   ngOnInit(): void {
+    this.recipientService.recipientSelectedEvent
+      .subscribe((recipient: Recipient) => {
+        this.selectedRecipient = recipient;
+      })
   }
 
 }

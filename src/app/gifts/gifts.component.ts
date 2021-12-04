@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Gift } from './gift.model';
+import { GiftService } from './gift.service';
 
 @Component({
   selector: 'app-gifts',
@@ -9,9 +10,13 @@ import { Gift } from './gift.model';
 export class GiftsComponent implements OnInit {
   selectedGift: Gift;
 
-  constructor() { }
+  constructor(private giftService: GiftService) { }
 
   ngOnInit(): void {
+    this.giftService.giftSelectedEvent
+      .subscribe((gift: Gift) => {
+        this.selectedGift = gift;
+      })
   }
 
 }
