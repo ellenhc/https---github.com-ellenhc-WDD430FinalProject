@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Gift } from '../gift.model';
 import { GiftService } from '../gift.service';
 
@@ -10,13 +10,16 @@ import { GiftService } from '../gift.service';
 export class GiftListComponent implements OnInit {
   gifts: Gift[] = [];
 
-  constructor(private giftService: GiftService) { }
-
-  ngOnInit(): void {
+  constructor(private giftService: GiftService) {
     this.gifts = this.giftService.getGifts();
   }
 
-  onSelectedGift(gift: Gift){
-    this.giftService.giftSelectedEvent.emit(gift);
+  ngOnInit() {
+    this.gifts = this.giftService.getGifts();
+
+    this.giftService.giftChangedEvent
+    .subscribe((giftsArray: Gift[]) => {
+      this.gifts = giftsArray;
+    });
   }
 }

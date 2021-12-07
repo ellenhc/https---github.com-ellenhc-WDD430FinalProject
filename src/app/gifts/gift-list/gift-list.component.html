@@ -2,15 +2,16 @@
     <div class="panel-heading">
         <div class="row pad-left-right">
             <span class="pull-left title">Gifts</span>
-            <a class="btn btn-success pull-right">Add Gift</a>
+            <a routerLink="new" class="btn btn-success pull-right">Add Gift</a>
         </div>
     </div>
     <div class="panel-body">
         <div class="center-panel">
-            <app-gift-item
-            *ngFor="let giftElement of gifts"
-            [gift]="giftElement"
-            (click)="onSelectedGift(giftElement)"></app-gift-item>
+            <app-gift-item 
+            *ngFor="let giftElement of gifts; let i = index" 
+            [gift]="giftElement" 
+            [id]="i">
+            </app-gift-item>
         </div>
     </div>
 

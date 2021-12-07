@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {Recipient} from '../recipient.model';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Recipient } from '../recipient.model';
+import { RecipientService } from '../recipient.service';
 
 @Component({
   selector: 'app-recipient-detail',
@@ -7,12 +9,23 @@ import {Recipient} from '../recipient.model';
   styleUrls: ['./recipient-detail.component.css']
 })
 export class RecipientDetailComponent implements OnInit {
+  recipient: Recipient;
+  id: string;
+  nativeWindow: any;
 
-  @Input() recipient: Recipient;
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private recipientService: RecipientService, private router: Router, private route: ActivatedRoute) {
   }
 
+  ngOnInit() {
+    this.route.params
+      .subscribe((params: Params) => {
+        this.id = params['id'];
+        this.recipient = this.recipientService.getRecipient(this.id);
+      })
+  }
+
+  onDelete() {
+    this.recipientService.deleteRecipient(this.recipient);
+    this.router.navigateByUrl('/recipients');
+  }
 }

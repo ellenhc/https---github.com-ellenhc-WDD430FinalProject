@@ -8,6 +8,7 @@ import { Gift } from '../../gift.model';
 })
 export class GiftItemComponent implements OnInit {
   @Input() gift: Gift;
+  @Input() id: number; //why is this here?
 
   constructor() { }
 

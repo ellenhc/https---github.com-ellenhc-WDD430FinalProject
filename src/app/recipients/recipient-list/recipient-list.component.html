@@ -12,8 +12,7 @@
     <div class="panel-body">
         <app-recipient-item 
         *ngFor="let recipientElement of recipients" 
-        [recipient]="recipientElement"
-        (click)="onSelected(recipientElement)">
+        [recipient]="recipientElement">
         </app-recipient-item>
     </div>
 </div>

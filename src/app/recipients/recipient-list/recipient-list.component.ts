@@ -10,13 +10,14 @@ import { RecipientService } from '../recipient.service';
 export class RecipientListComponent implements OnInit {
   recipients: Recipient[] = [];
 
-  constructor(private recipientService: RecipientService) { }
-
-  ngOnInit(): void {
+  constructor(private recipientService: RecipientService) {
     this.recipients = this.recipientService.getRecipients();
   }
 
-  onSelected(recipient: Recipient){
-    this.recipientService.recipientSelectedEvent.emit(recipient);
+  ngOnInit() {
+    this.recipientService.recipientChangedEvent
+      .subscribe((recipientssArray: Recipient[]) => {
+        this.recipients = recipientssArray;
+      });
   }
 }

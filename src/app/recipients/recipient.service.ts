@@ -10,6 +10,8 @@ export class RecipientService {
 
   recipientSelectedEvent = new EventEmitter<Recipient>();
 
+  recipientChangedEvent = new EventEmitter<Recipient[]>();
+
   constructor() {
     this.recipients = MOCKRECIPIENTS;
   }
@@ -18,12 +20,24 @@ export class RecipientService {
     return this.recipients.slice();
   }
 
-  getRecipient(id: string): Recipient{
-    for(let recipient in this.recipients){
-      if(this.recipients[id]== id){
-        return this.recipients[recipient];
-      } // end if
-    } // end for
+  getRecipient(id: string): Recipient {
+    for (let recipient of this.recipients) {
+      if (recipient.id == id) {
+        return recipient;
+      }
+    }
     return null;
+  }
+
+  deleteRecipient(recipient: Recipient) {
+    if (!recipient) {
+      return;
+    }
+    const pos = this.recipients.indexOf(recipient);
+    if (pos < 0) {
+      return;
+    }
+    this.recipients.splice(pos, 1);
+    this.recipientChangedEvent.emit(this.recipients.slice());
   }
 }

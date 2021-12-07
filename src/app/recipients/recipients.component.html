@@ -3,7 +3,9 @@
         <app-recipient-list></app-recipient-list>
     </div>
     <div class="col-md-4">
-        <app-recipient-detail
-        [recipient]="selectedRecipient"></app-recipient-detail>
+        <router-outlet></router-outlet>
+        <ng-template #infoText>
+            <p>Please select a recipient.</p>
+        </ng-template>
     </div>
 </div>
