@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Gift } from '../gift.model';
 import { GiftService } from '../gift.service';
 
@@ -10,16 +11,20 @@ import { GiftService } from '../gift.service';
 export class GiftListComponent implements OnInit {
   gifts: Gift[] = [];
 
+  subscription: Subscription;
+
   constructor(private giftService: GiftService) {
     this.gifts = this.giftService.getGifts();
   }
 
   ngOnInit() {
-    this.gifts = this.giftService.getGifts();
+    this.subscription = this.giftService.giftListChangedEvent
+      .subscribe((giftsList: Gift[]) => {
+        this.gifts = giftsList;
+      });
+  }
 
-    this.giftService.giftChangedEvent
-    .subscribe((giftsArray: Gift[]) => {
-      this.gifts = giftsArray;
-    });
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }

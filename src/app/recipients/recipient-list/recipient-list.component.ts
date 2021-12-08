@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Recipient } from '../recipient.model';
 import { RecipientService } from '../recipient.service';
 
@@ -10,14 +11,20 @@ import { RecipientService } from '../recipient.service';
 export class RecipientListComponent implements OnInit {
   recipients: Recipient[] = [];
 
+  subscription: Subscription;
+
   constructor(private recipientService: RecipientService) {
     this.recipients = this.recipientService.getRecipients();
   }
 
   ngOnInit() {
-    this.recipientService.recipientChangedEvent
-      .subscribe((recipientssArray: Recipient[]) => {
-        this.recipients = recipientssArray;
+    this.subscription = this.recipientService.recipientListChangedEvent
+      .subscribe((recipientsArray: Recipient[]) => {
+        this.recipients = recipientsArray;
       });
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }
