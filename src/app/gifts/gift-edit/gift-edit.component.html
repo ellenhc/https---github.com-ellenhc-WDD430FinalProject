@@ -1,1 +1,59 @@
-<p>gift-edit works!</p>
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <form id="gift-edit" (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label for="name">Gift:</label>
+                    <input type="text" id="name" class="form-control" size="120" max="120" [ngModel]="gift?.name" name="name" required #name="ngModel">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" class="form-control" size="120" max="255" [ngModel]="gift?.price" name="price">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label for="retailer">Retailer:</label>
+                    <input type="text" id="retailer" class="form-control" size="150" max="255" [ngModel]="gift?.retailer" name="retailer">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label for="url">Link:</label>
+                    <input type="text" id="url" class="form-control" size="150" max="255" [ngModel]="gift?.url" name="url" required #url="ngModel">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label for="imageUrl">Image:</label>
+                    <input type="text" id="imageUrl" class="form-control" size="150" max="255" [ngModel]="gift?.imageUrl" name="imageUrl">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label for="recipient">Recipient:</label>
+                    <input type="text" id="recipient" class="form-control" size="150" max="255" [ngModel]="gift?.recipient" name="recipient" required #recipient="ngModel">
+                </div>
+            </div>
+
+            <div *ngIf="(!name.valid) || (!url.valid) || (!recipient.valid)" class="alert alert-danger">The gift name, url, and recipient are required fields.</div>
+
+            <div class="row">
+                <div class="col-xs-12 btn-toolbar">
+                    <button class="btn btn-success" type="submit" [disabled]="!f.valid">Save</button>
+                    <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

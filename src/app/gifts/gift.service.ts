@@ -70,7 +70,7 @@ export class GiftService {
     this.giftListChangedEvent.next(this.gifts.slice());
   }
 
-  updatedGift(originalGift: Gift, newGift: Gift) {
+  updateGift(originalGift: Gift, newGift: Gift) {
     if (!originalGift || !newGift) {
       return;
     }

@@ -5,14 +5,14 @@ export const MOCKRECIPIENTS: Recipient[] = [
         id: '1',
         name: 'Greg',
         address: '16432 57th Ave SE',
-        email: 'chrisacarlson@comcast.net',
+        email: 'gregfcarlson@gmail.com',
         imageUrl: '../../assets/images/greg.jpg'
     },
     {
         id: '2',
         name: 'Chris',
         address: '16432 57th Ave SE',
-        email: 'gregfcarlson@gmail.com',
+        email: 'chrisacarlson@comcast.net',
         imageUrl: '../../assets/images/chris.jpg'
     },
     {
