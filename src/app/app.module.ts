@@ -16,6 +16,7 @@ import { GiftDetailComponent } from './gifts/gift-detail/gift-detail.component';
 import { GiftItemComponent } from './gifts/gift-list/gift-item/gift-item.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { RecipientsFilterPipe } from './recipients/recipients-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AppRoutingModule } from './app-routing.module';
     GiftListComponent,
     GiftEditComponent,
     GiftDetailComponent,
-    GiftItemComponent
+    GiftItemComponent,
+    RecipientsFilterPipe
   ],
   imports: [
     BrowserModule,

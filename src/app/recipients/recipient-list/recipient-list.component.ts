@@ -13,6 +13,8 @@ export class RecipientListComponent implements OnInit {
 
   subscription: Subscription;
 
+  term: string;
+
   constructor(private recipientService: RecipientService) {
     this.recipients = this.recipientService.getRecipients();
   }
@@ -26,5 +28,9 @@ export class RecipientListComponent implements OnInit {
 
   ngOnDestroy(){
     this.subscription.unsubscribe();
+  }
+
+  search(value: string){
+    this.term = value;
   }
 }

@@ -4,15 +4,18 @@
             <div class="col-md-6" style="font-size: 24px;">Recipients</div>
         </div>
         <div class="row col-md-12">
+            <div class="input-group pull-left col-xs-7">
+                <input type="text" #searchBox (keyup)=" search(searchBox.value)" class="form-control"
+                    placeholder="Enter a search value">
+                <div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
+            </div>
             <div class="pull-right">
                 <a routerLink="new" class="btn btn-success" role="button">New Contact</a>
             </div>
         </div>
     </div>
     <div class="panel-body">
-        <app-recipient-item 
-        *ngFor="let recipientElement of recipients" 
-        [recipient]="recipientElement">
+        <app-recipient-item *ngFor="let recipientElement of recipients | recipientsFilter:term" [recipient]="recipientElement">
         </app-recipient-item>
     </div>
 </div>
