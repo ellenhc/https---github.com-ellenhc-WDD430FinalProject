@@ -5,11 +5,12 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
 // import the routing file to handle the default (index) route
 var index = require('./server/routes/app');
-
-// ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ... 
+const recipientRoutes = require('./server/routes/recipients');
+const giftRoutes = require('./server/routes/gifts');
 
 var app = express(); // create an instance of express
 
@@ -38,16 +39,28 @@ app.use((req, res, next) => {
 
 // Tell express to use the specified director as the
 // root directory for your web site
-app.use(express.static(path.join(__dirname, 'dist/cms')));
+app.use(express.static(path.join(__dirname, 'dist/WDD430FinalProject')));
 
 // Tell express to map the default route ('/') to the index route
 app.use('/', index);
+app.use('/recipients', recipientRoutes);
+app.use('/gifts', giftRoutes);
 
-// ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
+// establish a connection to the mongo database
+mongoose.connect('mongodb://localhost:27017/christmas',
+  { useNewUrlParser: true }, (err, res) => {
+    if (err) {
+      console.log('Connection failed: ' + err);
+    }
+    else {
+      console.log('Connected to database!');
+    }
+  }
+);
 
 // Tell express to map all other non-defined routes back to the index page
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/cms/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/WDD430FinalProject/index.html'));
 });
 
 // Define the port address and tell express to use this port
@@ -58,6 +71,6 @@ app.set('port', port);
 const server = http.createServer(app);
 
 // Tell the server to start listening on the provided port
-server.listen(port, function() {
+server.listen(port, function () {
   console.log('API running on localhost: ' + port)
 });

@@ -14,7 +14,7 @@ import { GiftListComponent } from './gifts/gift-list/gift-list.component';
 import { GiftEditComponent } from './gifts/gift-edit/gift-edit.component';
 import { GiftDetailComponent } from './gifts/gift-detail/gift-detail.component';
 import { GiftItemComponent } from './gifts/gift-list/gift-item/gift-item.component';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipientsFilterPipe } from './recipients/recipients-filter.pipe';
 
@@ -37,7 +37,8 @@ import { RecipientsFilterPipe } from './recipients/recipients-filter.pipe';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

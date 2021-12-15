@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Recipient } from './recipient.model';
-import { MOCKRECIPIENTS } from './MOCKRECIPIENTS';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +15,34 @@ export class RecipientService {
 
   maxRecipientId: number;
 
-  constructor() {
-    this.recipients = MOCKRECIPIENTS;
+  constructor(private http: HttpClient) {
+    this.fetchRecipients();
     this.maxRecipientId = this.getMaxId();
   }
 
   getRecipients(): Recipient[] {
     return this.recipients.slice();
+  }
+
+  fetchRecipients() {
+    this.http.get('http://localhost:3000/recipients')
+      .subscribe(
+        // success method
+        (recipients: Recipient[]) => {
+          this.recipients = recipients['recipients'];
+          this.maxRecipientId = this.getMaxId();
+
+          this.recipients.sort((a, b) => {
+            if (a.name > b.name) { return 1 }
+            else if (a.name < b.name) { return -1 }
+            else { return 0 }
+          })
+          this.recipientListChangedEvent.next(this.recipients.slice());
+        }, // error method
+        (error: any) => {
+          console.log(error);
+        });
+    return;
   }
 
   getRecipient(id: string): Recipient {
@@ -53,18 +74,29 @@ export class RecipientService {
     if (pos < 0) {
       return;
     }
-    this.recipients.splice(pos, 1);
-    this.recipientListChangedEvent.next(this.recipients.slice());
+    this.http.delete('http://localhost:3000/recipients/' + recipient.id)
+      .subscribe((response: Response) => {
+        this.recipients.splice(pos, 1);
+        this.recipientListChangedEvent.next(this.recipients.slice());
+      })
   }
 
-  addRecipient(newRecipient: Recipient) {
-    if (!newRecipient) {
+  addRecipient(recipient: Recipient) {
+    if (!recipient) {
       return;
     }
-    this.maxRecipientId++;
-    newRecipient.id = this.maxRecipientId.toString();
-    this.recipients.push(newRecipient);
-    this.recipientListChangedEvent.next(this.recipients.slice());
+    recipient.id = '';
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http.post<{ message: string, recipient: Recipient }>
+      ('http://localhost:3000/recipients',
+        recipient,
+        { headers: headers })
+      .subscribe((responseData) => {
+        this.recipients.push(responseData.recipient);
+        this.recipientListChangedEvent.next(this.recipients.slice());
+      });
   }
 
   updateRecipient(originalRecipient: Recipient, newRecipient: Recipient) {
@@ -76,7 +108,24 @@ export class RecipientService {
       return;
     }
     newRecipient.id = originalRecipient.id;
-    this.recipients[pos] = newRecipient;
-    this.recipientListChangedEvent.next(this.recipients.slice());
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http.put('http://localhost:3000/recipients/' + originalRecipient.id,
+      newRecipient, { headers: headers })
+      .subscribe((response: Response) => {
+        this.recipients[pos] = newRecipient;
+        this.recipientListChangedEvent.next(this.recipients.slice());
+      });
+  }
+
+  // Returns the id of a recipient when given a name
+  getRecipientId(name: string) {
+    for (let recipient of this.recipients) {
+      if ((recipient.name).toLowerCase() == name.toLowerCase()) {
+        return recipient.id;
+      }
+    }
+    return null;
   }
 }

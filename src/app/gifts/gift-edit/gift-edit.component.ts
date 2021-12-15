@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { RecipientService } from 'src/app/recipients/recipient.service';
 import { Gift } from '../gift.model';
 import { GiftService } from '../gift.service';
 
@@ -14,7 +15,8 @@ export class GiftEditComponent implements OnInit {
   gift: Gift;
   editMode: Boolean = false;
 
-  constructor(private giftService: GiftService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private giftService: GiftService, private router: Router, private route: ActivatedRoute,
+    private recipientService: RecipientService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -41,7 +43,9 @@ export class GiftEditComponent implements OnInit {
 
   onSubmit(f: NgForm) {
     const value = f.value;
-    const newGift = new Gift(value.id, value.name, value.price, value.retailer, value.url, value.imageUrl, value.recipient);
+    const recipientId = this.recipientService.getRecipientId(value.recipient);
+    
+    const newGift = new Gift(value.id, value.name, value.price, value.retailer, value.url, value.imageUrl, recipientId);
     if (this.editMode) {
       this.giftService.updateGift(this.originalGift, newGift);
     }
