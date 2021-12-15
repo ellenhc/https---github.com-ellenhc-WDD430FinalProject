@@ -35,11 +35,6 @@ export class GiftDetailComponent implements OnInit {
         if (recipient == null || recipient.name == undefined) this.giftRecipient = 'N/A';
         else this.giftRecipient = recipient.name;
       });
-
-
-    // const recipient: Recipient = this.recipientService.getRecipient(this.gift.recipient);
-    // if (recipient == null || recipient.name == undefined) this.giftRecipient = 'N/A';
-    // else this.giftRecipient = recipient.name;
   }
 
   onView() {
